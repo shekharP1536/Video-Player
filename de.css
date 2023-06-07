@@ -1,0 +1,165 @@
+
+    .videoPlayer:hover #controls{
+        display: block;
+    }
+    #video{
+      display: block;
+    margin-left: auto;
+    margin-right: auto;
+    }
+    #controls{
+        /* display: none; */
+        background-color: rgba(43, 43, 43, 0.048);
+    }
+    #controls i{
+        font-size: 22px;
+    }
+    .rightcontrols{
+        display: flex;
+    float: right;
+    position: absolute;
+    right: 10px;
+    }
+    .leftcontrols{
+        display: flex;
+    position: relative;
+    align-items: center;
+    }
+ .tooltip {
+  position: absolute;
+  bottom: 100%;
+  /* left: 10px; */
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 5px 10px;
+  font-size: 12px;
+  white-space: nowrap;
+  /* opacity: 0; */
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.control-btn {
+  margin-right: 10px;
+  background-color: transparent;
+  border: none;
+  color: #000;
+  cursor: pointer;
+}
+.videocontrols{
+    display: flex;
+}
+.control-btn i {
+  pointer-events: none;
+}
+
+.control-bar {
+  position: relative;
+  width: 100%;
+  height: 5px;
+  background-color: #ccc;
+  cursor: pointer;
+}
+.control-bar:hover{
+    padding: 1px;
+}
+
+#progress-bar {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+#progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: red;
+}
+#progess::before{
+    content:'o';
+	position:absolute;
+	border-right:9px solid transparent;
+	border-left:9px solid transparent;
+	border-bottom:12px solid #222;
+	left:-10px;
+	top:50%;
+	transform:translateY(-50%) rotate(-90deg);
+}
+#volume-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#volume-bar {
+    /* display: none; */
+    position: absolute;
+    /* display: flex; */
+    margin-left: 50px;
+    text-align: center;
+    width: 60px;
+    cursor: pointer;
+}
+.theater-mode {
+  position: relative;
+  width: 50% !important;
+  height: 50% !important;
+}
+
+.theater-controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  z-index: 1;
+}
+
+.control-text {
+  margin-right: 20px;
+  font-weight: bolder;
+}
+
+.range input{
+    cursor: pointer;
+	-webkit-appearance:none;
+    appearance: none;
+	height:4px;
+	border-radius:5px;
+	background-color:#ccc;
+	outline:none;
+}
+.range input::-webkit-slider-thumb{
+	-webkit-appearance:none;
+	width:15px;
+	height:15px;
+	border-radius:50%;
+	background-color:#797777;
+    background-color: ();
+}
+.range input::-webkit-s{
+    background-color: #0f0;
+}
+.range span{
+    display: none;
+	position:absolute;
+	margin-left:50%;
+    bottom:  10px;
+    margin-bottom: 10px;
+	width:50px;
+	height:30px;
+	background-color:#222;
+	color:#fff;
+	border-radius:3px;
+	text-align:center;
+	line-height:30px;
+}
+.range:hover span{
+    display: block;
+}
