@@ -23,15 +23,12 @@ video.addEventListener("load", updateProgress)
 progressBarBar.addEventListener('click', seek);
 settings.addEventListener("click" , setting);
 volumeBtn.addEventListener('click', toggleMute);
-// volumeBar.addEventListener('click', adjustVolume);
-captionBtn.addEventListener('click', toggleCaption);
 theaterBtn.addEventListener('click', toggleTheaterMode);
 fullscreenBtn.addEventListener('click', toggleFullscreen);
 slider.oninput = function() {
     video.volume = this.value / 100;
   }
 // Get the progress bar element
-
 
 // Get the tooltip element
 var tooltip = document.querySelector(".tooltipsForTimestamp");
@@ -64,8 +61,11 @@ rangeInput.addEventListener('mousemove', function() {
 });
 
 let isSeeking = false;
+
 function setting(){
-  // settings.style.rotate = "50"
+  var setting = document.getElementById("settingPannel");
+  setting.classList.toggle("settingPannelVisible");
+ 
 }
 function togglePlayPause() {
   var animationspan = document.getElementById("videoanimation")
@@ -96,7 +96,18 @@ function updateProgress() {
 function seek(event) {
   if (!isSeeking) {
     const clickedTime = (event.offsetX / progressBarBar.offsetWidth) * video.duration;
+    // console.log(clickedTime)
     video.currentTime = clickedTime;
+  }if(isSeeking){
+    var progressWidth = progressBarBar.clientWidth;
+  var progressBarRect = progressBarBar.getBoundingClientRect();
+  var seekerRect = seeker.getBoundingClientRect();
+  var offsetX = seekerRect.left - progressBarRect.left;
+
+  var seekTime = (offsetX / progressWidth) * video.duration;
+
+  console.log('Seek time:', seekTime);
+  video.currentTime = seekTime;
   }
 }
 
@@ -115,55 +126,54 @@ function toggleMute() {
 
 
 function toggleCaption() {
-  if (video.textTracks.length > 0) {
-    const textTrack = video.textTracks[0];
-    textTrack.mode = (textTrack.mode === 'showing') ? 'hidden' : 'showing';
-    captionBtn.textContent = (textTrack.mode === 'showing') ? 'Caption: On' : 'Caption: Off';
+  var caption = false;
+  if(!caption){
+
   }
 }
 
 function toggleTheaterMode() {
   const theaterControls = document.getElementById('theater-controls');
-
+  if (document.fullscreenElement) {
+    document.exitFullscreen();
+  }
   if (!videoPlayer.classList.contains('theater-mode')) {
     videoPlayer.classList.add('theater-mode');
     theaterBtn.dataset.tooltip = 'Exit Theater Mode';
 
     // Create theater controls if they don't exist
     if (!theaterControls) {
-      const controls = document.getElementById('controls');
-      theaterControls = document.createElement('div');
-      theaterControls.id = 'theater-controls';
-      theaterControls.innerHTML = `
-        <button id="theater-play-pause-btn" class="control-btn" data-tooltip="Play">
-          <i class="fas fa-play"></i>
-        </button>
-        <div id="theater-time" class="control-text">0:00 / 0:00</div>
-        <div id="theater-progress-bar" class="control-bar" data-tooltip="">
-          <div id="theater-progress"></div>
-        </div>
-      `;
-      controls.appendChild(theaterControls);
+      // const controls = document.getElementById('controls');
+      // theaterControls = document.createElement('div');
+      // theaterControls.id = 'theater-controls';
+      // theaterControls.innerHTML = `
+      //   <button id="theater-play-pause-btn" class="control-btn" data-tooltip="Play">
+      //     <i class="fas fa-play"></i>
+      //   </button>
+      //   <div id="theater-time" class="control-text">0:00 / 0:00</div>
+      //   <div id="theater-progress-bar" class="control-bar" data-tooltip="">
+      //     <div id="theater-progress"></div>
+      //   </div>
+      // `;
+      // controls.appendChild(theaterControls);
 
-      const theaterPlayPauseBtn = document.getElementById('theater-play-pause-btn');
-      const theaterTimeText = document.getElementById('theater-time');
-      const theaterProgressBar = document.getElementById('theater-progress-bar');
-      const theaterProgressBarBar = document.getElementById('theater-progress');
+      // const theaterPlayPauseBtn = document.getElementById('theater-play-pause-btn');
+      // const theaterTimeText = document.getElementById('theater-time');
+      // const theaterProgressBar = document.getElementById('theater-progress-bar');
+      // const theaterProgressBarBar = document.getElementById('theater-progress');
 
-      theaterPlayPauseBtn.addEventListener('click', togglePlayPause);
-      video.addEventListener('timeupdate', () => {
-        theaterTimeText.textContent = `${formatTime(video.currentTime)} / ${formatTime(video.duration)}`;
-        const progress = (video.currentTime / video.duration) * 100;
-        theaterProgressBar.style.width = `${progress}%`;
-      });
-      theaterProgressBarBar.addEventListener('click', seek);
+      // theaterPlayPauseBtn.addEventListener('click', togglePlayPause);
+      // video.addEventListener('timeupdate', () => {
+      //   theaterTimeText.textContent = `${formatTime(video.currentTime)} / ${formatTime(video.duration)}`;
+      //   const progress = (video.currentTime / video.duration) * 100;
+      //   theaterProgressBar.style.width = `${progress}%`;
+      // });
+      // theaterProgressBarBar.addEventListener('click', seek);
 }
   } else {
     videoPlayer.classList.remove('theater-mode');
     theaterBtn.dataset.tooltip = 'Theater Mode';
-    if (theaterControls) {
-      theaterControls.remove();
-    }
+
   }
 }
 
@@ -192,7 +202,10 @@ function toggleFullscreen() {
     } else {
       videoPlayer.msRequestFullscreen();
     }
+
   }
+  videoContainer.style.height = "94%";
+  videoPlayer.style.width = "100%";
 }
 
 function formatTime(time) {
@@ -204,4 +217,89 @@ function formatTime(time) {
 video.addEventListener('ended', () => {
   playPauseBtn.innerHTML = '<i class="fas fa-redo"></i>';
   playPauseBtn.dataset.tooltip = "replay"
+  var animationspan = document.getElementById("videoanimation")
+  animationspan.classList.remove("animate")
+  animationspan.innerHTML = '<i class="fas fa-redo"></i>';
+});
+
+// var progressBar = document.getElementById('progress-bar');
+var progress = document.getElementById('progress');
+// var seeker = document.getElementById('seeker');
+// var videoDuration = 360; // Video duration in seconds (example: 6 minutes)
+
+// Function to update the video time based on seeker position
+function updateVideoTime() {
+  var isSeeking = true;
+  if(isSeeking){
+    var progressWidth = progressBarBar.clientWidth;
+  var progressBarRect = progressBarBar.getBoundingClientRect();
+  var seekerRect = seeker.getBoundingClientRect();
+  var offsetX = seekerRect.left - progressBarRect.left;
+
+  var seekTime = (offsetX / progressWidth) * video.duration;
+
+  console.log('Seek time:', seekTime);
+  video.currentTime = seekTime;
+  }
+  
+
+  // Update your video player's time here
+}
+
+
+seeker.addEventListener('mousedown', function (event) {
+  function moveSeeker(event) {
+    var rect = progressBarBar.getBoundingClientRect();
+    var offsetX = event.clientX - rect.left;
+    if (offsetX >= 0 && offsetX <= progressBarBar.clientWidth) {
+      seeker.style.left = offsetX + 'px';
+      progress.style.width = offsetX + 'px';
+    }
+  }
+
+  function stopMoving() {
+    document.removeEventListener('mousemove', moveSeeker);
+    document.removeEventListener('mouseup', stopMoving);
+    // updateVideoTime();
+    isSeeking = true;
+    // togglePlayPause()
+    seek(event);
+  }
+
+  document.addEventListener('mousemove', moveSeeker);
+  document.addEventListener('mouseup', stopMoving);
+});
+// const videoContainer = document.getElementById('videoContainer');
+const contextMenu = document.getElementById('contextMenu');
+
+videoContainer.addEventListener('contextmenu', (e) => {
+  e.preventDefault();
+  contextMenu.style.display = 'block';
+  contextMenu.style.top = e.clientY + 'px';
+  contextMenu.style.left = e.clientX + 'px';
+});
+
+window.addEventListener('click', () => {
+  contextMenu.style.display = 'none';
+});
+const settingPannel = document.getElementById('settingPannel');
+const captionPannel = document.querySelector('.captionPannel');
+// const settingsBtn = document.getElementById('settings-btn');
+// const captionBtn = document.getElementById('caption-btn');
+
+settingsBtn.addEventListener('click', () => {
+  settingPannel.classList.toggle('show');
+});
+
+captionBtn.addEventListener('click', () => {
+  captionPannel.classList.toggle('show');
+});
+
+window.addEventListener('click', (event) => {
+  if (!event.target.matches('#settings-btn')) {
+    settingPannel.classList.remove('show');
+  }
+  if (!event.target.matches('#caption-btn')) {
+    captionPannel.classList.remove('show');
+  }
 });

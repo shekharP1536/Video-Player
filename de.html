@@ -16,7 +16,21 @@
       <span class="videoanimation" id="videoanimation">
         <i class="fas fa-play"></i>
       </span>
-      <video id="video" src="/video.mp4"></video>
+      <video id="video" src="S:\movies\Pirates of the Caribbean 1 Hindi 480p (1).mkv"></video>
+    </div>
+    <div id="contextMenu">
+      <div>
+        <div class="option">Option 1</div>
+        <div class="option">Option 2</div>
+        <div class="option">Option 3</div>
+        <div class="option with-submenu">Option 4
+          <div class="submenu">
+            <div class="suboption">Suboption 1</div>
+            <div class="suboption">Suboption 2</div>
+            <div class="suboption">Suboption 3</div>
+          </div>
+        </div>
+      </div>
     </div>
     <div id="controls">
       <div id="progress-bar" class="control-bar">
@@ -47,11 +61,20 @@
           </div>
         </div>
         <div class="rightcontrols">
-
+          <div class="settingPannel" id="settingPannel">
+            <div class="settings">
+              <span>Quality</span><span class="settings_icon"><i class="	fas fa-angle-right"></i></span>
+            </div>
+            <div class="settings">Speed <span class="settings_icon"><i class="	fas fa-angle-right"></i></span></div>
+            <div class="settings">Rate <span class="settings_icon"><i class="	fas fa-angle-right"></i></span></div>
+          </div>
           <button class="control-btn" id="settings-btn" data-tooltip="Setting">
             <span class="tooltip">Setting</span>
             <i class="fas fa-cog"></i>
           </button>
+          <div class="captionPannel">
+            <div class="captionOptions">Captions</div>
+          </div>
           <button id="caption-btn" class="control-btn" data-tooltip="Caption: Off">
             <span class="tooltip">Caption: On</span>
             <i class="fas fa-closed-captioning"></i>
@@ -69,6 +92,8 @@
 
     </div>
   </div>
+
+
   <script src="de.js"></script>
 </body>
 
