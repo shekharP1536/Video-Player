@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video player</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="de.css">
+</head>
+
+<body>
+  <div id="video-player" class="videoPlayer">
+    <div class="videoContainer" id="videoContainer">
+      <span class="videoanimation" id="videoanimation">
+        <i class="fas fa-play"></i>
+      </span>
+      <video id="video" src="video.mp4"></video>
+    </div>
+    <div id="controls">
+      <div id="progress-bar" class="control-bar">
+        <span class="tooltipsForTimestamp">04:44</span>
+        <div id="progress"></div>
+        <div class="seeker" id="seeker"></div>
+      </div>
+      <div class="videocontrols">
+        <div class="leftcontrols">
+          <button id="play-pause-btn" class="control-btn" data-tooltip="Play">
+            <span class="tooltip">Play</span>
+            <i class="fas fa-play"></i>
+          </button>
+          <div id="time" class="control-text">0:00 / 0:00</div>
+
+          <div id="volume-wrapper">
+
+            <button id="volume-btn" class="control-btn" data-tooltip="Mute">
+              <span class="tooltip">Mute</span>
+              <i class="fas fa-volume-up"></i>
+            </button>
+            <div id="volume-bar" class="volume-bar">
+              <div class='range'>
+                <span>50%</span>
+                <input type="range" min='0' max='100' step='1' id="VolumeRange" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="rightcontrols">
+          <div class="settingPannel" id="settingPannel">
+            <div class="settings">
+              <span>Quality</span><span class="settings_icon"><i class="	fas fa-angle-right"></i></span>
+            </div>
+            <div class="settings">Speed <span class="settings_icon"><i class="	fas fa-angle-right"></i></span></div>
+            <div class="settings">Rate <span class="settings_icon"><i class="	fas fa-angle-right"></i></span></div>
+          </div>
+          <button class="control-btn" id="settings-btn" data-tooltip="Setting">
+            <span class="tooltip">Setting</span>
+            <i class="fas fa-cog"></i>
+          </button>
+          <div class="captionPannel">
+            <div class="captionOptions">Captions</div>
+          </div>
+          <button id="caption-btn" class="control-btn" data-tooltip="Caption: Off">
+            <span class="tooltip">Caption: On</span>
+            <i class="fas fa-closed-captioning"></i>
+          </button>
+          <button id="theater-btn" class="control-btn" data-tooltip="Theater Mode">
+            <span class="tooltip">Theater Mode</span>
+            <i class="fas fa-expand"></i>
+          </button>
+          <button id="fullscreen-btn" class="control-btn" data-tooltip="Fullscreen">
+            <span class="tooltip">Enter Fullscreen</span>
+            <i class="fas fa-expand-arrows-alt"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div id="contextMenu">
+    <ul>
+      <li class="option">Option 1</li>
+      <li class="option">Option 2</li>
+      <li class="option">Option 3</li>
+      <li class="option with-submenu">Option 4
+        <ul class="submenu">
+          <li class="suboption">Suboption 1</li>
+          <li class="suboption">Suboption 2</li>
+          <li class="suboption">Suboption 3</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <script src="de.js"></script>
+</body>
+
+</html>
