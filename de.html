@@ -12,20 +12,30 @@
 
 <body>
   <div id="video-player" class="videoPlayer">
-    <video id="video" src="video.mp4"></video>
+    <div class="videoContainer" id="videoContainer">
+      <span class="videoanimation" id="videoanimation">
+        <i class="fas fa-play"></i>
+      </span>
+      <video id="video" src="/video.mp4"></video>
+    </div>
     <div id="controls">
-      <div id="progress-bar" class="control-bar" data-tooltip="">
+      <div id="progress-bar" class="control-bar">
+        <span class="tooltipsForTimestamp">04:44</span>
         <div id="progress"></div>
+        <div class="seeker" id="seeker"></div>
       </div>
       <div class="videocontrols">
         <div class="leftcontrols">
           <button id="play-pause-btn" class="control-btn" data-tooltip="Play">
+            <span class="tooltip">Play</span>
             <i class="fas fa-play"></i>
           </button>
           <div id="time" class="control-text">0:00 / 0:00</div>
 
           <div id="volume-wrapper">
+
             <button id="volume-btn" class="control-btn" data-tooltip="Mute">
+              <span class="tooltip">Mute</span>
               <i class="fas fa-volume-up"></i>
             </button>
             <div id="volume-bar" class="volume-bar">
@@ -37,16 +47,21 @@
           </div>
         </div>
         <div class="rightcontrols">
+
           <button class="control-btn" id="settings-btn" data-tooltip="Setting">
+            <span class="tooltip">Setting</span>
             <i class="fas fa-cog"></i>
           </button>
           <button id="caption-btn" class="control-btn" data-tooltip="Caption: Off">
+            <span class="tooltip">Caption: On</span>
             <i class="fas fa-closed-captioning"></i>
           </button>
           <button id="theater-btn" class="control-btn" data-tooltip="Theater Mode">
+            <span class="tooltip">Theater Mode</span>
             <i class="fas fa-expand"></i>
           </button>
           <button id="fullscreen-btn" class="control-btn" data-tooltip="Fullscreen">
+            <span class="tooltip">Enter Fullscreen</span>
             <i class="fas fa-expand-arrows-alt"></i>
           </button>
         </div>
