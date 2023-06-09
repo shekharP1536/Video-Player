@@ -1,4 +1,4 @@
-const video = document.getElementById('video');
+var video = document.getElementById('video');
 const videoPlayer = document.getElementById('video-player');
 const playPauseBtn = document.getElementById('play-pause-btn');
 const timeText = document.getElementById('time');
@@ -209,9 +209,10 @@ function toggleFullscreen() {
 }
 
 function formatTime(time) {
-  const minutes = Math.floor(time / 60);
+  const hours = Math.floor(time / 3600);
+  const minutes = Math.floor((time % 3600) / 60);
   const seconds = Math.floor(time % 60);
-  return `${minutes}:${(seconds < 10) ? '0' : ''}${seconds}`;
+  return `${hours}:${(minutes < 10) ? '0' : ''}${minutes}:${(seconds < 10) ? '0' : ''}${seconds}`;
 }
 
 video.addEventListener('ended', () => {

@@ -8,26 +8,30 @@ function init() {
     video.addEventListener('timeupdate', handleTimeUpdate);
     subtitleContainer = document.createElement('div');
     subtitleContainer.id = 'subtitleContainer';
-    document.body.appendChild(subtitleContainer);
+    videoContainer.appendChild(subtitleContainer);
 }
 function handleTimeUpdate() {
-    var currentTime = video.currentTime;
-    // Clear subtitle container
-    subtitleContainer.innerHTML = '';
-    // subtitleContainer.style = "";
-    for (var i = 0; i < subtitleBlocks.length; i++) {
-        var block = subtitleBlocks[i];
-        var startTime = block.startTime;
-        var endTime = block.endTime;
-        // Check if the current time is within the block's time range
-        if (currentTime >= startTime && currentTime <= endTime) {
-            subtitleContainer.style = "background: black;padding: 2px;color: white;border-radius: 14px;width: fit-content;font-size: 17px;transition:1s;"
+    var checkbox = document.getElementById("captionCheck").checked;
+    if (checkbox) {
+        console.log("caption ON");
+        var currentTime = video.currentTime;
+        // Clear subtitle container
+        subtitleContainer.innerHTML = '';
+        // subtitleContainer.style = "";
+        for (var i = 0; i < subtitleBlocks.length; i++) {
+            var block = subtitleBlocks[i];
+            var startTime = block.startTime;
+            var endTime = block.endTime;
+            // Check if the current time is within the block's time range
+            if (currentTime >= startTime && currentTime <= endTime) {
+                subtitleContainer.style = "background: black;padding: 2px;color: white;border-radius: 14px;position: absolute;width: fit-content;bottom: 10px;/* font-size: 17px; */transition: all 1s ease 0s;margin-right: auto;margin-left: auto;"
 
-            // Create a <p> element for each subtitle line
-            for (var j = 0; j < block.subtitles.length; j++) {
-                var subtitleElement = document.createElement('p');
-                subtitleElement.innerHTML = block.subtitles[j];
-                subtitleContainer.appendChild(subtitleElement);
+                // Create a <p> element for each subtitle line
+                for (var j = 0; j < block.subtitles.length; j++) {
+                    var subtitleElement = document.createElement('p');
+                    subtitleElement.innerHTML = block.subtitles[j];
+                    subtitleContainer.appendChild(subtitleElement);
+                }
             }
         }
     }
@@ -86,43 +90,9 @@ function handleFileSelection(event) {
         reader.readAsText(file);
     }
 }
-const fileInput = document.getElementById('fileInput'); 
+const fileInput = document.getElementById('fileInput');
 fileInput.addEventListener('change', handleFileSelection);
 
-// function parseSubtitleFile(subtitleContent) {
-//     var titleRegex = /<title>([\s\S]*?)<\/title>/;
-//     var authorRegex = /<author>([\s\S]*?)<\/author>/;
-//     var publisherRegex = /<publisher>([\s\S]*?)<\/publisher>/;
-//     var dateRegex = /<date>([\s\S]*?)<\/date>/;
-//     var licenceRegex = /<licence>([\s\S]*?)<\/licence>/;
-//     var noteRegex = /<note>([\s\S]*?)<\/note>/;
-//     var langRegex = /<lang>([\s\S]*?)<\/lang>/;
-//     var startRegex = /<start>([\s\S]*?)<\/start>/;
-//     try {
-//         var title = titleRegex.exec(subtitleContent)[1].trim();
-//         var author = authorRegex.exec(subtitleContent)[1].trim();
-//         var publisher = publisherRegex.exec(subtitleContent)[1].trim();
-//         var date = dateRegex.exec(subtitleContent)[1].trim();
-//         var licence = licenceRegex.exec(subtitleContent)[1].trim();
-//         var note = noteRegex.exec(subtitleContent)[1].trim();
-//         var lang = langRegex.exec(subtitleContent)[1].trim();
-//         var start = startRegex.exec(subtitleContent)[1].trim();
-      
-//         console.log("Title:", title);
-//         console.log("Author:", author);
-//         console.log("Publisher:", publisher);
-//         console.log("Date:", date);
-//         console.log("Licence:", licence);
-//         console.log("Note:", note);
-//         console.log("Language:", lang);
-//         console.log("Start:", start);
-//     } catch (error) {
-//         console.log(error)
-//     }
-//     if (start) {
-//         processData(start);
-//     }
-// }
 function parseSubtitleFile(subtitleContent) {
     var titleRegex = /<title>([\s\S]*?)<\/title>/;
     var authorRegex = /<author>([\s\S]*?)<\/author>/;
@@ -134,50 +104,50 @@ function parseSubtitleFile(subtitleContent) {
     var startRegex = /<start>([\s\S]*?)<\/start>/;
 
     try {
-    var title = titleRegex.exec(subtitleContent)[1].trim();
+        var title = titleRegex.exec(subtitleContent)[1].trim();
     } catch (error) {
-    // console.log(error)
+        // console.log(error)
     }
     try {
-    var author = authorRegex.exec(subtitleContent)[1].trim();
+        var author = authorRegex.exec(subtitleContent)[1].trim();
     } catch (error) {
-    // console.log(error)
+        // console.log(error)
     }
     try {
-    var publisher = publisherRegex.exec(subtitleContent)[1].trim();
+        var publisher = publisherRegex.exec(subtitleContent)[1].trim();
     } catch (error) {
-    // console.log(error)
+        // console.log(error)
     }
     try {
-    var date = dateRegex.exec(subtitleContent)[1].trim();
+        var date = dateRegex.exec(subtitleContent)[1].trim();
     } catch (error) {
-    // console.log(error)
+        // console.log(error)
     }
     try {
-    var licence = licenceRegex.exec(subtitleContent)[1].trim();
+        var licence = licenceRegex.exec(subtitleContent)[1].trim();
     } catch (error) {
-    // console.log(error)
+        // console.log(error)
     }
     try {
-    var note = noteRegex.exec(subtitleContent)[1].trim();
+        var note = noteRegex.exec(subtitleContent)[1].trim();
     } catch (error) {
-    // console.log(error)
+        // console.log(error)
     }
     try {
-    var lang = langRegex.exec(subtitleContent)[1].trim();
+        var lang = langRegex.exec(subtitleContent)[1].trim();
     } catch (error) {
-    // console.log(error)
+        // console.log(error)
     }
     try {
-    var start = startRegex.exec(subtitleContent)[1].trim();
+        var start = startRegex.exec(subtitleContent)[1].trim();
     } catch (error) {
-    // console.log(error)
-    }try {
+        // console.log(error)
+    } try {
         processData(subtitleContent);
-    }catch{
+    } catch {
         console.log("There is error in file format. error code is 00005x3");
     }
-    
+
     console.log("Title:", title);
     console.log("Author:", author);
     console.log("Publisher:", publisher);
@@ -186,10 +156,9 @@ function parseSubtitleFile(subtitleContent) {
     console.log("Note:", note);
     console.log("Language:", lang);
     console.log("Start:", start);
-    
+
     if (start) {
-    processData(start);
+        processData(start);
     }
-   }
-   
-   
+}
+

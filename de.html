@@ -73,7 +73,9 @@
             <i class="fas fa-cog"></i>
           </button>
           <div class="captionPannel">
-            <div class="captionOptions">Captions</div>
+            Turn on caption:<input type="checkbox" name="" id="captionCheck">
+            <input type="file" name="caption" id="fileInput" name="name" style="display: none;" accept=".wss,.srt">
+            <label for="fileInput"><div class="captionOptions">Captions</div></label>
           </div>
           <button id="caption-btn" class="control-btn" data-tooltip="Caption: Off">
             <span class="tooltip">Caption: On</span>
@@ -95,6 +97,7 @@
 
 
   <script src="de.js"></script>
+  <script src="script.js"></script>
 </body>
 
 </html>
