@@ -32,8 +32,8 @@ slider.oninput = function() {
 
 // Get the tooltip element
 var tooltip = document.querySelector(".tooltipsForTimestamp");
-
-// Add a mousemove event listener to the progress bar
+let screenHeight = window.screen.height;
+// // Add a mousemove event listener to the progress bar
 progressBarBar.addEventListener("mousemove", function(e) {
   // Get the mouse x coordinate relative to the progress bar
   var mouseX = e.offsetX;

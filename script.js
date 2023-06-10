@@ -24,7 +24,7 @@ function handleTimeUpdate() {
             var endTime = block.endTime;
             // Check if the current time is within the block's time range
             if (currentTime >= startTime && currentTime <= endTime) {
-                subtitleContainer.style = "background: black;padding: 2px;color: white;border-radius: 14px;position: absolute;width: fit-content;bottom: 10px;/* font-size: 17px; */transition: all 1s ease 0s;margin-right: auto;margin-left: auto;"
+                // subtitleContainer.style = "background: black;padding: 2px;color: white;border-radius: 14px;position: absolute;width: fit-content;bottom: 10px;/* font-size: 17px; */transition: all 1s ease 0s;margin-right: auto;margin-left: auto;"
 
                 // Create a <p> element for each subtitle line
                 for (var j = 0; j < block.subtitles.length; j++) {

@@ -1,0 +1,184 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+  <title>Video Frame Preview</title>
+  <style>
+    #video {
+      max-width: 100%;
+      height: auto;
+    }
+    #canvas {
+      display: none; /* Hide the canvas element initially */
+    }
+    #preview {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <video id="video" src="video.mp4" controls></video>
+  <canvas id="canvas"></canvas>
+  <img id="preview" alt="Video Preview">
+  
+  <script>
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const previewImage = document.getElementById('preview');
+    const desiredTime = 5;
+    
+    // Set the canvas dimensions to match the video element
+    video.addEventListener('loadedmetadata', function() {
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+    });
+    
+    function captureFrame() {
+      video.currentTime = desiredTime;
+      
+      video.addEventListener('seeked', function() {
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        
+        previewImage.src = canvas.toDataURL();
+        canvas.style.display = 'none'; // Hide the canvas
+        previewImage.style.display = 'block'; // Show the preview image
+      });
+    }
+    
+    captureFrame();
+  </script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .container {
+            position: relative;
+            width: 600px;
+        }
+        
+        .video {
+            width: 100%;
+        }
+        
+        .progress-bar {
+            position: relative;
+            width: 100%;
+            height: 8px;
+            background-color: #f2f2f2;
+            cursor: pointer;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: #0000FF;
+            transition: width 0.3s ease-in-out;
+        }
+        
+        .preview-video {
+            position: absolute;
+            top: -200px;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        
+        .progress-bar:hover .preview-video {
+            opacity: 1;
+        }
+        
+        .time-indicator {
+            position: absolute;
+            top: -25px;
+            left: 0;
+            width: 60px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            color: #000;
+            background-color: #f2f2f2;
+            border-radius: 4px;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        
+        .progress-bar:hover .time-indicator {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <video id="video" class="video" src="video.mp4" controls></video>
+        <div id="progress-bar" class="progress-bar">
+            <div id="progress-fill" class="progress-fill"></div>
+            <video id="preview-video" class="preview-video" preload="metadata"></video>
+            <div id="time-indicator" class="time-indicator"></div>
+        </div>
+    </div>
+
+    <script>
+        const video = document.getElementById('video');
+        const progressBar = document.getElementById('progress-bar');
+        const progressFill = document.getElementById('progress-fill');
+        const previewVideo = document.getElementById('preview-video');
+        const timeIndicator = document.getElementById('time-indicator');
+
+        function updateProgressBar() {
+            const progress = (video.currentTime / video.duration) * 100;
+            progressFill.style.width = `${progress}%`;
+        }
+
+        function showPreview(event) {
+            const { clientX, target } = event;
+            const { offsetLeft, offsetWidth } = target;
+            const progressWidth = (clientX - offsetLeft) / offsetWidth;
+            const previewTime = progressWidth * video.duration;
+
+            const currentTime = video.currentTime;
+            video.currentTime = previewTime;
+
+            const previewPositionX = (clientX - offsetLeft) - (previewVideo.offsetWidth / 2);
+            previewVideo.style.transform = `translateX(${previewPositionX}px)`;
+
+            const currentTimeFormatted = formatTime(previewTime);
+            timeIndicator.textContent = currentTimeFormatted;
+            const timeIndicatorPositionX = (clientX - offsetLeft) - (timeIndicator.offsetWidth / 2);
+            timeIndicator.style.transform = `translateX(${timeIndicatorPositionX}px)`;
+
+            video.play();
+        }
+
+        function hidePreview() {
+            video.pause();
+            video.currentTime = 0;
+            timeIndicator.textContent = '';
+        }
+
+        function formatTime(timeInSeconds) {
+            const minutes = Math.floor(timeInSeconds / 60);
+            const seconds = Math.floor(timeInSeconds % 60);
+            return `${padTime(minutes)}:${padTime(seconds)}`;
+        }
+
+        function padTime(time) {
+            return time.toString().padStart(2, '0');
+        }
+
+        progressBar.addEventListener('mousemove', showPreview);
+        progressBar.addEventListener('mouseout', hidePreview);
+        progressBar.addEventListener('click', function(event) {
+            const { clientX, target } = event;
+            const { offsetLeft, offsetWidth } = target;
+            const progressWidth = (clientX - offsetLeft) / offsetWidth;
+            const seekTime = progressWidth * video.duration;
+            video.currentTime = seekTime;
+        });
+        video.addEventListener('timeupdate', updateProgressBar);
+    </script>
+</body>
+</html>
